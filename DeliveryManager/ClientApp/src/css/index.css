@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    body {
+        padding-top: 50px;
+    }
+}
+
+body {
+    background-color: #F7F7F7;
+    font-family :"Port Lligat Sans";
+}

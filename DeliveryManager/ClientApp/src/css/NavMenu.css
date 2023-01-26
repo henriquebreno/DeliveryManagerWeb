@@ -1,0 +1,650 @@
+﻿
+
+aside.app-sidebar {
+    position: absolute;
+    top: auto;
+    left: 0;
+    bottom: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    z-index: 100108;
+    min-height: 100%;
+    background-color: #FFF;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+    aside.app-sidebar .sidebar-header {
+        height: auto;
+        width: 180px;
+        padding: 0 10px;
+        position: relative;
+        /*box-shadow:0 1px 3px #dfe6e8;*/
+        text-align: center;
+    }
+
+        aside.app-sidebar .sidebar-header .sidebar-brand {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 90px;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: #444;
+        }
+
+            aside.app-sidebar .sidebar-header .sidebar-brand img {
+                width: 70px;
+                height: 70px;
+                text-align: center;
+                margin-top: 0px;
+            }
+
+            aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
+                padding: 2px 5px;
+                font-weight: 200;
+                color: #FFF;
+                border-radius: 2px;
+                margin-right: 5px;
+            }
+
+        aside.app-sidebar .sidebar-header .sidebar-toggle {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: auto;
+            bottom: auto;
+            right: 0;
+            width: auto;
+            height: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0;
+            padding: 0 15px;
+            background-color: transparent;
+            font-size: 1.4em;
+        }
+
+    aside.app-sidebar .sidebar-menu {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        width: 180px;
+        -ms-flex: 1;
+        flex: 1;
+    }
+
+        aside.app-sidebar .sidebar-menu ul.sidebar-nav {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            height: 100%;
+            width: 100%;
+            /* list-style: none; */
+            margin: 0;
+            padding: 3rem 0 4rem 0;
+        }
+
+            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li {
+                width: 100%;
+                margin-bottom: 1px;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li:last-child {
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a {
+                    padding: 6px 10px;
+                    width: 100%;
+                    display: flex;
+                    text-align: center;
+                    color: #444;
+                    float: left;
+                    text-decoration: none;
+                    align-items:center;
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a:hover {
+                        background: #d37c1c;
+                        color: #fff;
+                    }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a.active {
+                    background: #d37c1c;
+                    color: #fff;
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon  {
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-direction: row;
+                    flex-direction: row;
+                    -ms-flex-wrap: nowrap;
+                    flex-wrap: nowrap;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    display: block;
+                    width: 22px;
+                    height: 30px;
+                    float: left;
+                    border-radius: 50%;
+                    color: #FFF;
+                    margin-right: 3px;
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon svg.fa, aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon i.ion {
+                        width: 70%;
+                        height: 100%;
+                        font-size: 14px;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-direction: row;
+                        flex-direction: row;
+                        -ms-flex-wrap: nowrap;
+                        flex-wrap: nowrap;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        transition: transform 0.2s ease;
+                    }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .title {
+                    font-weight: 400;
+                    font-size: 0.95em;
+                    color: #8d9293;
+                    float: left;
+                    text-align:center;
+                    text-transform: none;
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a:hover .icon i.fa, aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a:hover .icon i.ion {
+                    transform: scale(1.25);
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-toggle {
+                    position: relative;
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-toggle:before {
+                        position: absolute;
+                        top: 0;
+                        left: auto;
+                        bottom: auto;
+                        right: 30px;
+                        width: auto;
+                        height: 100%;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-direction: row;
+                        flex-direction: row;
+                        -ms-flex-wrap: nowrap;
+                        flex-wrap: nowrap;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        font-family: FontAwesome;
+                        content: "\f107";
+                        color: #dfe6e8;
+                        font-size: 1.4em;
+                        transition: all 0.3s ease;
+                        display: none;
+                    }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu {
+                    display: block;
+                    visibility: hidden;
+                    position: absolute;
+                    opacity: 0;
+                    left: 120%;
+                    top: 50%;
+                    min-width: 220px;
+                    transition: all 0.3s ease;
+                    border: 0;
+                    transform: translate(0px, -50%);
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul {
+                        list-style: none;
+                        padding: 1rem 1.5rem;
+                        margin: 0;
+                    }
+
+                        aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul:after {
+                            position: absolute;
+                            top: 50%;
+                            left: 0;
+                            bottom: auto;
+                            right: auto;
+                            width: 100%;
+                            height: 100%;
+                            content: '';
+                            display: block;
+                            width: 0;
+                            height: 0;
+                            transform: translate(-100%, -100%);
+                            border-top: 15px solid transparent;
+                            border-bottom: 15px solid transparent;
+                            border-right: 15px solid #ffffff;
+                        }
+
+                        aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li:first-child {
+                            border-top: 1px solid rgba(0, 0, 0, 0.1);
+                        }
+
+                        aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li {
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                            border-radius: 0;
+                            padding: 0;
+                            margin-bottom: 0;
+                            font-weight: 400;
+                            font-size: 1em;
+                        }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.section {
+                                padding: 1rem;
+                                padding-left: 3.6rem;
+                                font-weight: 400;
+                                font-size: 0.95em;
+                                position: relative;
+                                border-bottom: 1px solid #dfe6e8
+                            }
+
+                                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.section i {
+                                    align-items: center;
+                                    background: #22363f none repeat scroll 0 0;
+                                    border-radius: 30px;
+                                    bottom: auto;
+                                    color: #fff;
+                                    display: flex;
+                                    flex-flow: row nowrap;
+                                    font-size: 12px;
+                                    height: 30px;
+                                    justify-content: center;
+                                    left: 0;
+                                    position: absolute;
+                                    right: auto;
+                                    top: 4px;
+                                    width: 30px;
+                                }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.line {
+                                height: 1px;
+                                background-color: rgba(223, 230, 232, 0.5);
+                                position: relative;
+                                width: 100%;
+                                margin-top: 1rem;
+                                margin-bottom: 1rem;
+                            }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li a {
+                                display: block;
+                                text-decoration: none;
+                                color: #666666;
+                                font-weight: 400;
+                                font-size: 1em;
+                                padding: 1rem 1rem;
+                                position: relative;
+                            }
+
+                                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li a:before {
+                                    position: absolute;
+                                    top: 0;
+                                    left: auto;
+                                    bottom: auto;
+                                    right: 8px;
+                                    width: auto;
+                                    height: 100%;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -ms-flex-direction: row;
+                                    flex-direction: row;
+                                    -ms-flex-wrap: nowrap;
+                                    flex-wrap: nowrap;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    -ms-flex-pack: center;
+                                    justify-content: center;
+                                    font-family: FontAwesome;
+                                    content: "\f105";
+                                    color: #666;
+                                    opacity: 0;
+                                    transition: all 0.3s ease;
+                                    transform: translate(50%, 0);
+                                }
+
+                                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li a:hover {
+                                    background: #d37c1c;
+                                    color: #fff;
+                                }
+
+                                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li a:hover:before {
+                                        opacity: 1;
+                                        color: #fff;
+                                        transform: translate(0, 0);
+                                    }
+
+    aside.app-sidebar .sidebar-footer {
+        width: 180px;
+        padding: 0;
+        position: relative;
+        box-shadow: 0 -1px 2px #dfe6e8;
+    }
+
+        aside.app-sidebar .sidebar-footer ul.menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+            aside.app-sidebar .sidebar-footer ul.menu > li > a {
+                padding: 15px 8px;
+                font-size: 1em;
+                display: block;
+                color: #c8d1d3;
+            }
+
+                aside.app-sidebar .sidebar-footer ul.menu > li > a .flag-icon {
+                    border-radius: 50%;
+                    height: 15px;
+                    width: 15px;
+                    box-shadow: none;
+                }
+
+            aside.app-sidebar .sidebar-footer ul.menu > li.dropdown {
+                position: static !important;
+            }
+
+                aside.app-sidebar .sidebar-footer ul.menu > li.dropdown > a {
+                    position: relative;
+                }
+
+                aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu {
+                    width: 100%;
+                    left: 0;
+                    padding: 0;
+                    top: auto;
+                    bottom: 100%;
+                    z-index: 100113;
+                    border-radius: 2px;
+                    border: 0;
+                    box-shadow: none;
+                }
+
+                    aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu > li {
+                        border: 0;
+                        border-radius: 0;
+                        padding: 0;
+                        margin-bottom: 0;
+                        font-weight: 300;
+                        border-bottom: 1px solid rgba(200, 209, 211, 0.2);
+                        font-size: 0.9em;
+                        background-color: #FFF;
+                    }
+
+                        aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu > li a {
+                            display: block;
+                            text-decoration: none;
+                            color: #666;
+                            padding: 0.9rem 1.5rem;
+                        }
+
+                            aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu > li a:hover {
+                                background-color: #FFF;
+                                color: #18aa4a;
+                            }
+
+    aside.app-sidebar.active {
+        transform: translate(0, 0);
+    }
+
+@media (min-width: 767.01px) {
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown:hover .dropdown-menu {
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        transform: translate(-40px, -37%);
+    }
+}
+
+@media (max-width: 767px) {
+    aside.app-sidebar {
+        transform: translate(-100%, 0);
+        box-shadow: none;
+        width: 100%;
+    }
+
+        aside.app-sidebar .sidebar-header, aside.app-sidebar .sidebar-menu, aside.app-sidebar .sidebar-footer {
+            width: 100%;
+        }
+
+        aside.app-sidebar .sidebar-header {
+            height: 70px;
+            border-bottom: 1px solid #f0f4f5;
+        }
+
+            aside.app-sidebar .sidebar-header .sidebar-brand {
+                height: 70px;
+            }
+
+            aside.app-sidebar .sidebar-header .sidebar-toggle {
+                display: block;
+                color: #fff;
+            }
+
+        aside.app-sidebar .sidebar-menu {
+            position: relative;
+            overflow: auto;
+        }
+
+            aside.app-sidebar .sidebar-menu ul.sidebar-nav {
+                padding: 0;
+            }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a {
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-direction: row;
+                    flex-direction: row;
+                    -ms-flex-wrap: nowrap;
+                    flex-wrap: nowrap;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -ms-flex-pack: start;
+                    justify-content: flex-start;
+                    padding: 5px 10px;
+                    border-bottom: 1px solid transparent;
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .title {
+                        padding-top: 0;
+                    }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon {
+                        margin: 0;
+                        background-color: transparent !important;
+                        border-radius: 0;
+                        margin-right: 5px;
+                        width: 38px;
+                        height: 34px;
+                    }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-toggle:before {
+                    display: -ms-flexbox;
+                    display: flex;
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu {
+                    display: none;
+                    visibility: visible;
+                    opacity: 1;
+                    width: 100%;
+                    left: 0;
+                    top: 0;
+                    position: relative;
+                    transform: translate(0, 0);
+                    margin-top: 0;
+                    border-radius: 0;
+                    border: 0;
+                    box-shadow: none;
+                    padding: 0;
+                    background-color: rgba(223, 230, 232, 0.2);
+                }
+
+                    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul {
+                        padding: 0;
+                    }
+
+                        aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li {
+                            border-bottom: 1px solid rgba(223, 230, 232, 0.5);
+                        }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li a {
+                                padding: 15px;
+                                padding-left: 65px;
+                            }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.section {
+                                padding: 15px;
+                                padding-left: 70px;
+                            }
+
+                                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.section > i {
+                                    height: 30px;
+                                    left: 30px;
+                                    margin-right: 10px;
+                                    width: 30px;
+                                    top: 12px;
+                                }
+
+                            aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown .dropdown-menu > ul > li.line {
+                                display: none;
+                            }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown.open .dropdown-toggle:before {
+                    content: "\f106";
+                }
+
+                aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown.open .dropdown-menu {
+                    display: block;
+                }
+
+        aside.app-sidebar.active {
+            transform: translate(0, 0);
+        }
+
+    .app-container.__sidebar {
+        overflow: hidden;
+        height: 100vh;
+    }
+
+        .app-container.__sidebar .app-container {
+            height: 100vh;
+            overflow: hidden;
+        }
+
+    aside.app-sidebar .sidebar-header .sidebar-brand img {
+        height: 55px;
+        margin-top: 0;
+        text-align: center;
+        width: 55px;
+    }
+}
+
+aside.app-sidebar {
+    background-color: #191919;
+    box-shadow: 3px 0px 5px 0 rgba(0, 0, 0, 0.16), 3px 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+    aside.app-sidebar .sidebar-header .sidebar-brand .highlight {
+        background-color: #39a2e9;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .icon {
+        /*background-color: rgba(255, 255, 255, 1);*/
+        color: #fff;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li > a .title {
+        color: #fff;
+        font-size: 15px;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.active > a .icon {
+        /*background-color: #ffffff;*/
+        color: #fff;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.active > a .title {
+        color: #ffffff;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown > .dropdown-menu > ul > li.section {
+        color: #22363f;
+    }
+
+    aside.app-sidebar .sidebar-menu ul.sidebar-nav > li.dropdown.open > a:after {
+        border-right-color: #FFF;
+    }
+
+    aside.app-sidebar .sidebar-footer {
+        border-top-color: rgba(0, 0, 0, 0.1);
+        background-color: #FFF;
+    }
+
+    aside.app-sidebar .sidebar-footer ul.menu > li.dropdown .dropdown-menu {
+        border-bottom-color: #39a2e9;
+    }
+.logo-name {
+    color: #d37c1c;
+    font-family: "Port Lligat Sans";
+    text-align: center;
+}
+
