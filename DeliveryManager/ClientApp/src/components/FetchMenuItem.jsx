@@ -1,27 +1,26 @@
-﻿import React, { Component, useState } from 'react';
+﻿
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fas, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Modal } from "../components/Modal";
+import { Modal } from "./Modal";
 
+export class FetchMenuItem extends Component
+{
+    displayName = FetchMenuItem.name;
 
-
-
-export class FetchClient extends Component {
-    displayName = FetchClient.name;
 
     constructor(props) {
         super(props);
         this.state = {
-            clients: [],
+            menuItens:  [],
             loading: true,
             searchBox: "",
             showModal: false,
             selectedClientId: 0
         }
-      
+
         this.handlerDelete = this.handlerDelete.bind(this);
-        this.handlerEdit = this.handlerEdit.bind(this);
         this.handlerRefresh = this.handleRefresh.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -29,10 +28,10 @@ export class FetchClient extends Component {
     }
 
     handleRefresh() {
-        fetch('api/Client')
+        fetch('api/MenuItem')
             .then(response => response.json())
             .then(data => {
-                this.setState({ clients: data, loading: false });
+                this.setState({ menuItens: data, loading: false });
             });
     }
 
@@ -52,54 +51,50 @@ export class FetchClient extends Component {
     }
 
 
-    showModal(clientId)
-    {
-        this.setState({ showModal: true,selectedClientId:clientId });    
+    showModal(clientId) {
+        this.setState({ showModal: true, selectedClientId: clientId });
     }
 
-    hideModal()
-    {
+    hideModal() {
         this.setState({ showModal: false });
     }
 
     handlerDelete(clientId) {
-        
-        fetch('api/Client/' + clientId, {
+
+        fetch('api/MenuItem/' + clientId, {
             method: 'DELETE'
         })
-        .then((response) => response.json())
-        .then((data) => {
-            this.setState({ clients: data, loading: false });
-            this.handleRefresh();
-            //this.props.history.push("/fetchclient");
-        })
-            
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({ clients: data, loading: false });
+                this.handleRefresh();
+                //this.props.history.push("/fetchclient");
+            })
+
     }
 
-    handlerEdit(clienteId) {
-        this.props.history.push("/Clientes/Edit/" + clienteId);
-    }
-
-    renderClientTable(cliente) {
+    renderClientTable(cardapio) {
         return (
-
+             
             <table className='table'>
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Cpf</th>
-                        <th>Telefone</th>
+                        <th>Descrição</th>
+                        <th>Preco</th>
+                        <th>Imagem</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {cliente.map(cliente =>
+                    {cardapio.map(cardapio =>
                         <tr>
-                            <td>{cliente.nome}</td>
-                            <td>{cliente.cpf}</td>
-                            <td>{cliente.telefone}</td>
+                            <td>{cardapio.nome}</td>
+                            <td>{cardapio.descricao}</td>
+                            <td>{cardapio.preco}</td>
+                            <td><img src={cardapio.url}  width="200" height="100" /></td>
                             <td>
-                                <button className="btn btn-success" onClick={id => this.handlerEdit(cliente.id_cliente)}>Editar</button>&nbsp;
-                                <button className="btn btn-danger " onClick={id => this.handlerDelete(cliente.id_cliente)}>Deletar</button>
+                                <button className="btn btn-success" onClick={id => this.handlerEdit(cardapio.id_Cardapio)}>Editar</button>&nbsp;                                
+                                <button className="btn btn-danger " onClick={id => this.handlerDelete(cardapio.id_Cardapio)}>Deletar</button>
                             </td>
                         </tr>
                     )}
@@ -107,10 +102,11 @@ export class FetchClient extends Component {
             </table>
         );
     }
-    render() {
+    render()
+    {
         //let contents = this.state.loading
         //    ? <p><em>Loading...</em></p>
-        //    : /*this.renderClientTable(this.state.cliente);*/ "";
+        //    : this.renderClientTable(this.state.cardapio);
 
         return (
             <div className="row card_item_block" style={{ paddingLeft: "30px", paddingRight: "30px" }}>
@@ -119,7 +115,7 @@ export class FetchClient extends Component {
                     <div className="card mrg_bottom">
                         <div className="page_title_block">
                             <div className="col-md-5 col-xs-12">
-                                <div className="page_title">Usuários</div>
+                                <div className="page_title">Cardápio</div>
                             </div>
                             <div className="col-md-6 col-md-offset-1 col-xs-12">
                                 <div className="col-sm-12">
@@ -147,7 +143,7 @@ export class FetchClient extends Component {
                                                 </button>
                                             </form>
                                         </div>
-                                        <Link to={"/addclient"}>
+                                        <Link to={"/addMenuItem"}>
                                             <div className="add_btn_primary">
 
                                                 <a >Add New</a>
@@ -185,27 +181,29 @@ export class FetchClient extends Component {
                                     <tr>
                                         <th style={{ width: "40px" }}>#</th>
                                         <th>Nome</th>
-                                        <th>Email</th>
+                                        <th>Preço</th>
+                                        <th>Descrição</th>
                                         <th nowrap="">Registrado em</th>
                                         <th>Status</th>
                                         <th className="cat_action_list">Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.clients && this.state.clients.map((client,index) =>
+                                    {this.state.menuItens && this.state.menuItens.map((menuItem, index) =>
                                         <tr className="item_holder">
 
                                             <td>
                                                 <div>
                                                     <div className="checkbox">
-                                                        <input type="checkbox" name="post_ids[]" id={"checkbox" + (index)} value={ index} className="post_ids"></input>
+                                                        <input type="checkbox" name="post_ids[]" id={"checkbox" + (index)} value={index} className="post_ids"></input>
                                                         <label htmlFor={"checkbox" + (index)}>
                                                         </label>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td nowrap="">{client.FullName}</td>
-                                            <td>{client.Email}</td>
+                                            <td nowrap="">{menuItem.Name}</td>
+                                            <td>{menuItem.Price.Amount}</td>
+                                            <td>{menuItem.Description}</td>
                                             <td></td>
                                             <td>
                                                 <input type="checkbox" id={"enable_disable_check_" + (index)} data-id={index} className="cbx hidden enable_disable" ></input>
@@ -213,23 +211,23 @@ export class FetchClient extends Component {
                                             </td>
                                             <td nowrap="">
 
-                                                <a 
+                                                <a
                                                     className="btn btn-primary btn_cust"
                                                     data-toggle="tooltip"
                                                     data-tooltip="Edit"
-                                                    onClick={ id => this.handlerEdit(client.ClientId)}>
+                                                    onClick={id => this.handlerEdit(menuItem.ClientId)}>
 
                                                     <i className="fa fa-edit">
                                                     </i>
                                                 </a>
 
-                                                <a 
+                                                <a
                                                     className="btn btn-danger btn_delete_a"
                                                     data-base-url="http://viavilab.com/codecanyon/restaurant_script_demo/admin/users/delete_users_id/"
                                                     data-toggle="tooltip"
                                                     data-id="1"
                                                     data-tooltip="Delete"
-                                                    onClick={ id => this.showModal(client.ClientId)}
+                                                    onClick={id => this.showModal(menuItem.ClientId)}
                                                 >
                                                     <i className="fa fa-trash">
                                                     </i>
@@ -263,8 +261,8 @@ export class FetchClient extends Component {
                 </div>
 
 
-                <Modal show={this.state.showModal} handleClose={this.hideModal} callBack={(event) => this.handlerDelete(this.state.selectedClientId) }>
-                  <p>Modal</p>
+                <Modal show={this.state.showModal} handleClose={this.hideModal} callBack={(event) => this.handlerDelete(this.state.selectedClientId)}>
+                    <p>Modal</p>
                 </Modal>
 
             </div>

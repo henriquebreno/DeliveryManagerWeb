@@ -28,7 +28,7 @@ render() {
                             <li>
                                 <button type="button" className="navbar-toggle">
 
-                                    <img className="profile-img" src="http://viavilab.com/codecanyon/restaurant_script_demo/images/profile.png" />
+                                    <img className="profile-img" src="" />
                                 </button>
                             </li>
                         </ul>
@@ -40,7 +40,7 @@ render() {
                         <a href="http://viavilab.com/codecanyon/restaurant_script_demo/" target="_blank" style={{
                             fontSize: "14px", color: "#FFF", border: "1px solid rgba(255, 255, 255, 0.7)", padding: "8px 12px", borderRadius: "2px", marginRight: "20px"
                         }} >
-                            <i class="fa fa-desktop" style={{ paddingRight: "6px" }}>
+                            <i className="fa fa-desktop" style={{ paddingRight: "6px" }}>
                                 <FontAwesomeIcon icon={faMobileAlt} className="fa" />
                             </i> 
                                 Visit Website
@@ -48,7 +48,7 @@ render() {
 
                             <li className="dropdown profile"> <a href="#" className="dropdown-toggle" data-toggle="dropdown">
 
-                                <img className="profile-img" src="http://viavilab.com/codecanyon/restaurant_script_demo/images/profile.png" />
+                                <img className="profile-img" src="" />
 
                                 <div className="title">Profile</div>
                             </a>

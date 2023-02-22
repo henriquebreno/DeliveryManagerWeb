@@ -1,32 +1,39 @@
 ﻿import React, { Component } from 'react';
-import { cpfMask, telephoneMask } from '../shared/mask';
+import { cpfMask, telephoneMask, birthDateMask } from '../shared/mask';
 import '../css/Client.css'
+import { InputCursorText } from 'react-bootstrap-icons';
+
+
 
 export class Cliente {
     constructor() {
+        this.email = "";
         this.cpf = "";
         this.nome = "";
-        this.telefone = "";       
+        this.telefone = "";
         this.id_Cliente = 0;
-        this.logradouro = "";
-        this.cep = "";
-        this.numero = "";
-        this.bairro = "";
-        this.cidade = "";
-        this.estado = "";
-        this.complemento = "";
+        //this.logradouro = "";
+        //this.cep = "";
+        //this.numero = "";
+        //this.bairro = "";
+        //this.cidade = "";
+        //this.estado = "";
+        //this.complemento = "";
         this.id_Endereco = 0
+        this.dataNascimento = "";
     }
-}  
+}
 
-export class AddClient extends Component
-{
+export class AddClient extends Component {
     displayName = AddClient.name;
 
-    constructor(props)
-    {
-        super(props);     
-        this.state = { title: "", loading: true, clientData: new Cliente };
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: "",
+            loading: true,
+            clientData: new Cliente
+        };
 
         var clientId = this.props.match.params["clientId"];
         if (clientId) {
@@ -37,13 +44,12 @@ export class AddClient extends Component
                     fetch('Enderecos/Details/' + clientId)
                         .then((response) => response.json())
                         .then((data) => {
-                            this.setState({ title: "Edit", loading: false, clientData: data});
+                            this.setState({ title: "Edit", loading: false, clientData: data });
 
-                    })
+                        })
                 })
-        } else
-        {
-            this.state = { title: "Create", loading: false, clientData: new Cliente  };
+        } else {
+            this.state = { title: "Create", loading: false, clientData: new Cliente };
         }
 
         this.handleSave = this.handleSave.bind(this);
@@ -54,255 +60,164 @@ export class AddClient extends Component
 
 
     handleSave(event) {
- 
+
         event.preventDefault();
-        const data = new FormData(event.target);
+        var clientData = this.state.clientData;
 
-        var  clientData  = this.state.clientData;
-
-
-        // PUT request for Edit employee.  
-        if (clientData.id_Cliente) {
-            data.set("Id_Cliente", clientData.id_Cliente)
-            fetch('Clientes/Edit/' + clientData.id_Cliente, {
-                method: 'PUT',
-                body: data,
-            })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    data.set("Id_Endereco", clientData.id_Endereco)
-                    fetch('Enderecos/Edit/' + clientData.id_Cliente, {
-                        method: 'PUT',
-                        body: data,
-                    })
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        this.props.history.push("/fetchclient");
-                    })
-                })
-        }
 
         // POST request for Add employee.  
-        else {
-            fetch('Clientes/Create', {
-                method: 'POST',
-                body: data,
+
+        fetch('api/client', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                Cpf: clientData.cpf,
+                FullName: clientData.nome,
+                Cellphone: clientData.telefone,
+                Email: clientData.email,
+                //this.logradouro = "";
+                //this.cep = "";
+                //this.numero = "";
+                //this.bairro = "";
+                //this.cidade = "";
+                //this.estado = "";
+                //this.complemento = "";
+
+                BirthDate: clientData.dataNascimento
             })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                data.set("Id_Cliente", responseJson.id_cliente)
-                fetch('Enderecos/Create', {
-                    method: 'POST',
-                    body: data,
-                })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    this.props.history.push("/fetchclient");
-                })
-            })
-        }              
+        })
+        .then((response) => {
+            if (response.length > 0)
+                return response.json()
+            } 
+        )
+        .then((response) => {
+            this.props.history.push("/fetchclient");
+        }).catch((error) => {
+            console.log(error)
+        });
+
 
     }
 
     handleCancel(event) {
         event.preventDefault();
-        this.props.history.push("/fetchclient");   
-    }  
+        this.props.history.push("/fetchclient");
+    }
 
+    handleChange(event, callback) {
 
-    renderCreateForm()
-    {
+        const path = event.target.name.split('.');
+        const depth = path.length;
+        const state = { ...this.state };
+        let stateRef = state;
+        for (let i = 0; i < depth; i += 1) {
+            if (i === depth - 1) {
+                var valueRef = callback != null ? callback(event.target.value) : event.target.value;
+                event.target.value = valueRef;
+                stateRef[path[i]] = event.target.value = valueRef;
+            } else {
+                stateRef = stateRef[path[i]];
+            }
+        }
+
+        this.setState(state);
+    }
+
+    renderCreateForm() {
+
+    }
+    render() {
+        let contents = this.state.loading
+            ? <p><em>Loading...</em></p>
+            : null;
         return (
-            <form onSubmit={ this.handleSave}>
-                < div className="form-group row" >
-                    <div className="col-md-10" >
-                        <label className=" control-label text-primary h4" htmlFor="Informacoes Pessoais">Informações Pessoais</label>
-                        <input type="hidden" name="ClienteId" />
-                    </div>
-                    <div class="col-md-5">
-                        <label className=" control-label" htmlFor="Nome">Nome Completo</label>
-                        <div className="">
-                            <input id="teste"
-                                className="form-control"
-                                type="text"
-                                name="Nome"
-                                value={this.state.clientData.nome}
-                                onChange={(event) => {
-                                    this.state.clientData.nome = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="page_title_block">
+                        <div class="col-md-5 col-xs-12">
+                            <div class="page_title">Add Users</div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <label className=" control-label" htmlFor="Cpf">Cpf</label>
-                        <div className="">
-                            <input className="form-control"
-                                type="text"
-                                name="Cpf" value={this.state.clientData.cpf}
-                                onChange={(event) => {
-                                    this.state.clientData.cpf = cpfMask(event.target.value);
-                                    this.setState({ clientData: this.state.clientData });
-                                }}  
-                                required
-                            />
-                        </div>
-                    </div>
-                </div >
-                <div className="form-group row">
-                    <label className="control-label col-md-12" htmlFor="Telefone" >Telefone</label>
-                    <div className="col-md-4">
-                        <input className="form-control"
-                            type="text" name="Telefone"
-                            value={this.state.clientData.telefone}
-                            onChange={(event) => {
-                                this.state.clientData.telefone = telephoneMask(event.target.value);
-                                this.setState({ clientData: this.state.clientData });
-                            }}
-                            required
-                        />
+                    <div class="clearfix"></div>
+                    <div class="card-body">
+                        <form action="http://viavilab.com/codecanyon/restaurant_script_demo/admin/users/addForm" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                            <input type="hidden" name="csrf_test_name" value="ca3b4de8a742c8c50ec794ced876df2d"></input>
+                            <div class="section">
+                                <div class="section-body">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Nome:-</label>
+                                        <div class="col-md-6">
+                                            <input type="text" required="" placeholder="Insira o nome completo" id="name" name="clientData.nome" class="form-control" value={this.state.clientData.nome}
+                                                onChange={(event) => {
+
+                                                    this.handleChange(event)
+                                                }}></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Email :-
+                </label>
+                                        <div class="col-md-6">
+                                            <input type="text" required="" placeholder="Insira o email" id="email" name="clientData.email" class="form-control" value={this.state.clientData.email}
+                                                onChange={(event) => {
+
+                                                    this.handleChange(event)
+                                                }}></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Telefone :-
+                                        
+                </label>
+                                        <div class="col-md-6">
+
+                                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="15" placeholder="Insira o telefone" id="phone" name="clientData.telefone" class="form-control" value={this.state.clientData.Telefone}
+                                                onChange={(event) => {
+                                                    this.handleChange(event, telephoneMask)
+                                                }}></input>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Data de Nascimento :-
+                                        
+                </label>
+                                        <div class="col-md-6">
+                                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="15" placeholder="Insira a data de Nascimento" id="birthDate" name="clientData.dataNascimento" class="form-control" value={this.state.clientData.dataNascimento}
+                                                onChange={(event) => {
+
+                                                    this.handleChange(event, birthDateMask)
+                                                }}></input>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Cpf :-
+                                        
+                </label>
+                                        <div class="col-md-6">
+                                            <input type="text" onkeypress="return isNumberKey(event)" maxlength="15" placeholder="Insira o cpf" id="phone" name="clientData.cpf" class="form-control" value={this.state.clientData.cpf}
+                                                onChange={(event) => {
+
+                                                    this.handleChange(event, cpfMask)
+                                                }}></input>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <button type="submit" name="btn_submit" class="btn btn-primary" onClick={(event) => this.handleSave(event)}>Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
+            </div>
 
-                < div className="form-group row" >
-                    <div className="col-md-12" >
-                        <label className=" control-label text-primary h4" htmlFor="Endereco">Endereço</label>
-                        <input type="hidden" name="ClienteId" />
-                    </div>
-                    <div class="col-md-2">
-                        <label className=" control-label" htmlFor="Nome">CEP</label>
-                        <div className="">
-                            <input  className="form-control"
-                                type="text"
-                                name="Cep"
-                                value={this.state.clientData.cep}
-                                onChange={(event) => {
-                                    this.state.clientData.cep = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }} 
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <label className=" control-label" htmlFor="Cpf">Logradouro</label>
-                        <div className="">
-                            <input className="form-control"
-                                type="text"
-                                name="Logradouro"
-                                value={this.state.clientData.logradouro}
-                                onChange={(event) => {
-                                    this.state.clientData.logradouro = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div class="col-md-3    ">
-                        <label className=" control-label" htmlFor="Cpf">Número</label>
-                        <div className="">
-                            <input className="form-control"
-                                type="text"
-                                name="Numero"
-                                value={this.state.clientData.numero}
-                                onChange={(event) => {
-                                    this.state.clientData.numero = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
-                        </div>
-                    </div>
-                </div >
-                < div className="form-group row" >
-
-                    <div class="col-md-4">
-                        <label className=" control-label" htmlFor="Nome">Bairro</label>
-                        <div className="">
-                            <input id="teste"
-                                className="form-control"
-                                type="text"
-                                name="Bairro"
-                                value={this.state.clientData.bairro}
-                                onChange={(event) => {
-                                    this.state.clientData.bairro = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label className=" control-label" htmlFor="Cpf">Cidade</label>
-                        <div className="">
-                            <input className="form-control"
-                                type="text"
-                                name="Cidade"
-                                value={this.state.clientData.cidade}
-                                onChange={(event) => {
-                                    this.state.clientData.cidade = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label className=" control-label" htmlFor="Cpf">Estado</label>
-                        <div className="">
-                            <input className="form-control"
-                                type="text"
-                                name="Estado" value={this.state.clientData.estado}
-                                onChange={(event) => {
-                                    this.state.clientData.estado = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-                                required
-                            />
-                        </div>
-                    </div>
-                </div >
-                < div className="form-group row" >
-
-                    <div class="col-md-4">
-                        <label className=" control-label" htmlFor="Nome">Complemento</label>
-                        <div className="">
-                            <input id="teste"
-                                className="form-control"
-                                type="text"
-                                name="Complemento"
-                                value={this.state.clientData.complemento}
-                                onChange={(event) => {
-                                    this.state.clientData.complemento = event.target.value;
-                                    this.setState({ clientData: this.state.clientData });
-                                }}
-
-                            />
-                        </div>
-                    </div>
-                   
-                </div >
-                <div className="form-group">
-                    <button type="submit" className="btn btn-default" >Save</button>&nbsp;    
-                    <button className="btn btn-default" onClick={this.handleCancel}>Cancel</button>
-                </div >
-            </form >
-        )  
-    }
-    render()
-    {
-        let contents = this.state.loading
-                ? <p><em>Loading...</em></p>
-                : this.renderCreateForm();
-        return (
-
-            <div>
-                <h3>Clientes</h3>
-                <hr />
-                {contents}
-            </div>  
         );
     }
 }

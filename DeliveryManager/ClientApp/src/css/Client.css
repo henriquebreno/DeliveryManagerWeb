@@ -272,3 +272,20 @@ table.table > tbody > tr td, table.table > tbody > tr th, table.table > thead > 
     content: '';
     transition: all 0.3s ease;
 }
+.card .card-body {
+    padding: 30px 20px;
+}
+
+.form-horizontal .form-group {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+.form-horizontal .control-label {
+    font-weight: 400;
+    font-size: 1em;
+    text-align: left;
+}

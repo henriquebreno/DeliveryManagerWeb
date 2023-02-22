@@ -38,6 +38,7 @@ namespace DeliveryManager
             //services.AddServiceDependency();
           
             services.AddScoped<IClientCommand, ClientCommand>();
+            services.AddScoped<IMenuItemCommand, MenuItemCommand>();
 
         }
 

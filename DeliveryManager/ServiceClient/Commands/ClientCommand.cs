@@ -21,17 +21,25 @@ namespace DeliveryManager.Web.ServiceClient.Commands
         public void AddNewClient(ClientViewModel clienteViewModel) 
         {
             var result = Post<ClientViewModel, ClientViewModel>(ClientEndpoint,clienteViewModel);
-          
+            if (!result.HttpResponse.IsSuccessStatusCode)
+            {
+                throw new Exception(result.HttpResponse.Content.ReadAsStringAsync().Result);
+            }
+
+
         }
 
         public List<ClientViewModel> GetAllClients()
         {
             var result = Get<List<ClientViewModel>>(ClientEndpoint);
-            if (result.HttpResponse.IsSuccessStatusCode) 
+            if (result.HttpResponse.IsSuccessStatusCode)
             {
                 return result.ContentObject;
             }
-            return null;
+            else 
+            {
+                throw new Exception(result.HttpResponse.Content.ReadAsStringAsync().Result);
+            }
         }
 
         public ClientViewModel GetClient(long clientId)
@@ -41,12 +49,20 @@ namespace DeliveryManager.Web.ServiceClient.Commands
             {
                 return result.ContentObject;
             }
-            return null;
+            else
+            {
+                throw new Exception(result.HttpResponse.Content.ReadAsStringAsync().Result);
+            }
+            
         }
 
         public void RemoveClient(long clientId)
         {
             var result = Delete<ClientViewModel>(ClientDeleteEndpoint.Replace("{clientId}", clientId.ToString()));
+            if (!result.HttpResponse.IsSuccessStatusCode) 
+            {
+                throw new Exception(result.HttpResponse.Content.ReadAsStringAsync().Result);
+            }
            
         }
     }

@@ -1,4 +1,4 @@
-﻿using DeliveryManager.Model;
+﻿using DeliveryManager.Web.Model;
 using DeliveryManager.Web.ServiceClient.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,22 +13,23 @@ namespace DeliveryManager.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : Controller
+    public class MenuItemController : Controller
     {
-        private IClientCommand _clientCommand;
+        private IMenuItemCommand _menuItemCommand;
 
-        public ClientController(IClientCommand clientCommand)
+        public MenuItemController(IMenuItemCommand menuItemCommand)
         {
-            _clientCommand = clientCommand;
+            _menuItemCommand = menuItemCommand;
         }
-        // GET: api/<ValuesController>
+
+        // GET: api/<MenuItemController>
         [HttpGet]
         public IActionResult Get()
         {
-            
+
             try
             {
-                var result = _clientCommand.GetAllClients();
+                var result = _menuItemCommand.GetAllMenuItem();
                 return Json(result);
             }
             catch (Exception ex)
@@ -37,13 +38,13 @@ namespace DeliveryManager.Web.Controllers
             }
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{clientId}")]
-        public IActionResult Get(long  clientId)
+        // GET api/<MenuItemController>/5
+        [HttpGet("{menuItemId}")]
+        public IActionResult Get(long menuItemId)
         {
             try
             {
-                var result = _clientCommand.GetClient(clientId);
+                var result = _menuItemCommand.GetMenuItem(menuItemId);
                 return Json(result);
             }
             catch (Exception ex)
@@ -52,14 +53,14 @@ namespace DeliveryManager.Web.Controllers
             }
         }
 
-        // POST api/<ValuesController>
+        // POST api/<MenuItemController>
         [HttpPost]
-        public IActionResult Post([FromBody] ClientViewModel clientViewModel)
+        public IActionResult CreateProduct([FromBody] MenuItemViewModel product)
         {
             try
             {
-                _clientCommand.AddNewClient(clientViewModel);
-                return Ok();
+                _menuItemCommand.AddNewMenuItem(product);
+                return StatusCode((int)HttpStatusCode.Created);
             }
             catch (Exception ex)
             {
@@ -67,20 +68,20 @@ namespace DeliveryManager.Web.Controllers
             }
         }
 
-        // PUT api/<ValuesController>/5
+        // PUT api/<MenuItemController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{clientId}")]
-        public IActionResult Delete(int clientId)
+        // DELETE api/<MenuItemController>/5
+        [HttpDelete("{menuItemId}")]
+        public IActionResult RemoveProduct(long productId)
         {
             try
             {
-                _clientCommand.RemoveClient(clientId);
-                return Json("");
+                _menuItemCommand.RemoveMenuItem(productId);
+                return StatusCode((int)HttpStatusCode.OK);
             }
             catch (Exception ex)
             {

@@ -2,7 +2,7 @@
 import CameraIcon from '../img/camera-icon.png';
 import { Modal } from 'react-modal';
 
-export class Cardapio {
+export class MenuItem {
     constructor() {
         this.preco = 0;
         this.descricao = "";
@@ -12,7 +12,9 @@ export class Cardapio {
     }
 }  
 
-export class AddCardapio extends Component
+
+
+export class AddMenuItem extends Component
 {
     displayName = AddCardapio.name;
 

@@ -22,6 +22,9 @@ namespace DeliveryManager.Model
         [JsonProperty(PropertyName = "Email")]
         public string Email { get; set; }
 
+        [JsonProperty(PropertyName = "BirthDate")]
+        public string BirthDate { get; set; }
+
         [JsonProperty(PropertyName = "ClientId")]
         public int ClientId { get; set; }
     }
